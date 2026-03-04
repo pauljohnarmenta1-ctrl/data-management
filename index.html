@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Municipal Assessor Management System</title>
-    <!-- Tailwind with custom theme -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -32,7 +31,7 @@
         }
       }
     </script>
-    <!-- Google Material Symbols for icons -->
+    Google Material Symbols for icons
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="https://unpkg.com/lucide@latest/dist/lucide.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -40,7 +39,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body class="tail-container bg-softGray text-gray-800 font-sans">
-    <!-- LOGIN SCREEN -->
+    LOGIN SCREEN
     <div id="login-screen" class="min-h-screen flex items-center justify-center">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-10 border border-gray-100">
             <div class="text-center mb-10">
@@ -87,11 +86,11 @@
             </div>
         </div>
     </div>
-    <!-- MAIN APP -->
+    MAIN APP
     <div id="main-app" class="hidden h-screen flex overflow-hidden bg-gray-50">
-        <!-- SIDEBAR -->
+        SIDEBAR
         <div class="w-72 professional-sidebar flex flex-col bg-gradient-to-b from-blue-900 via-blue-800 to-blue-900 shadow-xl">
-            <!-- Logo -->
+            Logo
             <div class="sidebar-header relative px-8 py-8 flex items-center gap-3 bg-blue-950 border-b border-blue-700">
                 <div class="w-14 h-14 bg-white text-blue-600 rounded-2xl flex items-center justify-center font-bold text-2xl shadow-md transform hover:scale-105 transition-transform">
                     <span class="material-symbols-outlined text-2xl">account_balance</span>
@@ -105,7 +104,7 @@
                 </button>
             </div>
            
-            <!-- Navigation -->
+            Navigation
             <div class="flex-1 px-4 py-8 overflow-y-auto sidebar-nav bg-gradient-to-b from-blue-500 via-blue-800 to-blue-500">
                 <nav class="space-y-1">
                     <a onclick="navigateTo('dashboard')" id="nav-dashboard"
@@ -138,32 +137,32 @@
                 </nav>
             </div>
            
-            <!-- Footer -->
+            Footer
             <div class="sidebar-footer bg-blue-950 border-t border-blue-700 p-4">
-                <button onclick="logout()"
-                        class="logout-btn w-full flex items-center justify-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-600 text-sm transition-colors shadow-md">
+                <button onclick="showLogoutModal()"
+                        class="logout-btn w-full flex items-center justify-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-600 text-sm transition-colors shadow-md hover:shadow-lg active:scale-95">
                     <span class="material-symbols-outlined">logout</span>
                     <span>Logout</span>
                 </button>
             </div>
         </div>
        
-        <!-- MAIN CONTENT -->
+        MAIN CONTENT
         <div class="flex-1 flex flex-col">
-            <!-- Top Bar -->
-            <header class="professional-header px-8 py-6 flex items-center justify-between bg-gradient-to-r from-blue-700 via-blue-600 to-blue-800 shadow-lg">
+            Top Bar
+            <header class="professional-header px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between bg-gradient-to-r from-blue-700 via-blue-600 to-blue-800 shadow-lg">
                 <div class="flex items-center gap-4 flex-1">
                     <button class="md:hidden p-2 rounded-md hover:bg-blue-600" onclick="setSidebarMobile(true)">
                         <span class="material-symbols-outlined w-6 h-6 text-blue-100">menu</span>
                     </button>
                     <div>
-                        <h1 id="page-title" class="text-3xl font-bold text-white">Dashboard Overview</h1>
-                        <p id="page-subtitle" class="text-sm text-blue-100 mt-1">Welcome back, Admin</p>
+                        <h1 id="page-title" class="text-xl sm:text-3xl font-bold text-white">Dashboard Overview</h1>
+                        <p id="page-subtitle" class="text-xs sm:text-sm text-blue-100 mt-1">Welcome back, Admin</p>
                     </div>
                 </div>
                
-                <div class="flex items-center gap-8">
-                    <div class="relative flex-1 max-w-md">
+                <div class="flex items-center gap-2 sm:gap-8">
+                    <div class="relative flex-1 max-w-xs sm:max-w-md">
                         <div class="relative group">
                         <input id="global-search"
                             onkeyup="if(event.key === 'Enter') handleGlobalSearch()"
@@ -173,7 +172,7 @@
                        </div>
                     </div>
                    
-                    <div class="flex items-center gap-6">
+                    <div class="hidden sm:flex items-center gap-6">
                         <button onclick="showNotifications()" class="relative text-blue-100 hover:text-white transition-colors group">
                             <span class="material-symbols-outlined">notifications</span>
                             <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full group-hover:scale-125 transition-transform"></span>
@@ -182,26 +181,26 @@
                         <div id="current-date" class="text-blue-100 text-sm font-500 min-w-max"></div>
                     </div>
                    
-                    <div class="flex items-center gap-4 ml-6 pl-6 border-l border-blue-500">
+                    <div class="flex items-center gap-3 sm:gap-4 ml-3 sm:ml-6 pl-3 sm:pl-6 border-l border-blue-500">
                         <div class="text-right hidden sm:block">
                             <div class="font-600 text-sm text-white">Admin Staff</div>
                             <div class="text-xs text-blue-100">Municipal Assessor</div>
                         </div>
-                        <div class="w-11 h-11 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-lg flex items-center justify-center font-bold text-sm shadow-md hover:shadow-lg transition-shadow cursor-pointer">
+                        <div class="w-10 sm:w-11 h-10 sm:h-11 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-lg flex items-center justify-center font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-shadow cursor-pointer">
                             AS
                         </div>
                     </div>
                 </div>
             </header>
            
-            <!-- Content Area -->
-            <div class="flex-1 overflow-auto p-8 bg-gradient-to-br from-gray-50 via-blue-50/10 to-gray-50">
+            Content Area
+            <div class="flex-1 overflow-auto p-4 sm:p-8 bg-gradient-to-br from-gray-50 via-blue-50/10 to-gray-50">
                
-                <!-- DASHBOARD SECTION -->
+                DASHBOARD SECTION
                 <div id="dashboard-section" class="section">
-                    <!-- Stats Grid -->
+                    Stats Grid
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-                        <!-- Total Properties -->
+                        Total Properties
                         <div onclick="navigateTo('property-records')" class="stat-card card-hover cursor-pointer rounded-xl p-6 flex flex-col justify-between h-40 relative overflow-hidden group">
                             <div class="absolute top-0 left-0 right-0 h-1 bg-primary"></div>
                             <div class="flex justify-between items-start">
@@ -216,7 +215,7 @@
                             <div class="text-xs text-blue-600 font-600">↑ Records in system</div>
                         </div>
                        
-                        <!-- Pending Transactions -->
+                        Pending Transactions
                         <div onclick="navigateTo('transactions')" class="stat-card card-hover cursor-pointer rounded-xl p-6 flex flex-col justify-between h-40 relative overflow-hidden group">
                             <div class="absolute top-0 left-0 right-0 h-1 bg-accentOrange"></div>
                             <div class="flex justify-between items-start">
@@ -231,7 +230,7 @@
                             <div class="text-xs text-amber-600 font-600">⏳ Awaiting action</div>
                         </div>
                        
-                        <!-- Completed Documents -->
+                        Completed Documents
                         <div onclick="navigateTo('transactions')" class="stat-card card-hover cursor-pointer rounded-xl p-6 flex flex-col justify-between h-40 relative overflow-hidden group">
                             <div class="absolute top-0 left-0 right-0 h-1 bg-accentGreen"></div>
                             <div class="flex justify-between items-start">
@@ -246,7 +245,7 @@
                             <div class="text-xs text-green-600 font-600">✓ Documents released</div>
                         </div>
                        
-                        <!-- Completed Appraisals -->
+                        Completed Appraisals
                         <div onclick="navigateTo('taxmapping')" class="stat-card card-hover cursor-pointer rounded-xl p-6 flex flex-col justify-between h-40 relative overflow-hidden group">
                             <div class="absolute top-0 left-0 right-0 h-1 bg-accentPurple"></div>
                             <div class="flex justify-between items-start">
@@ -263,7 +262,7 @@
                     </div>
                    
                     <div class="grid grid-cols-12 gap-6">
-                        <!-- Recent Activity -->
+                        Recent Activity
                         <div class="col-span-8 bg-white rounded-xl p-8 border border-gray-200 relative overflow-hidden">
                             <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700"></div>
                             <div class="flex items-center justify-between mb-6">
@@ -279,7 +278,7 @@
                             <div id="recent-activity" class="space-y-4"></div>
                         </div>
                        
-                        <!-- Quick Actions -->
+                        Quick Actions
                         <div class="col-span-4 bg-white rounded-xl p-8 border border-gray-200 relative overflow-hidden">
                             <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700"></div>
                             <div>
@@ -307,7 +306,7 @@
                     </div>
                 </div>
                
-                <!-- PROPERTY RECORDS SECTION -->
+                PROPERTY RECORDS SECTION
                 <div id="property-records-section" class="section hidden">
                     <div class="flex justify-between items-center mb-8">
                         <div>
@@ -359,7 +358,7 @@
                     </div>
                 </div>
                
-                <!-- TRANSACTIONS SECTION -->
+                TRANSACTIONS SECTION
                 <div id="transactions-section" class="section hidden">
                     <div class="flex justify-between items-center mb-8">
                         <div>
@@ -396,7 +395,7 @@
                     </div>
                 </div>
                
-                <!-- TAX MAPPING SECTION -->
+                TAX MAPPING SECTION
                 <div id="taxmapping-section" class="section hidden">
                     <div class="flex justify-between items-center mb-8">
                         <div>
@@ -439,7 +438,7 @@
                     </div>
                 </div>
                
-                <!-- REPORTS SECTION -->
+                REPORTS SECTION
                 <div id="reports-section" class="section hidden">
                     <div class="flex justify-between items-center mb-8">
                         <div>
@@ -485,7 +484,7 @@
             </div>
         </div>
     </div>
-    <!-- PROPERTY MODAL -->
+    PROPERTY MODAL
     <div id="property-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
         <div class="modal bg-white rounded-xl w-full max-w-2xl mx-4 overflow-hidden border border-gray-200">
             <div class="px-8 py-6 border-b flex items-center justify-between bg-gray-50">
@@ -553,7 +552,7 @@
             </div>
         </div>
     </div>
-    <!-- TAX MAPPING MODAL -->
+    TAX MAPPING MODAL
     <div id="tax-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
         <div class="modal bg-white rounded-xl w-full max-w-lg mx-4 border border-gray-200">
             <div class="px-8 py-6 border-b flex items-center justify-between bg-gray-50">
@@ -597,7 +596,7 @@
             </div>
         </div>
     </div>
-    <!-- DELETE CONFIRM MODAL -->
+    DELETE CONFIRM MODAL
     <div id="delete-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
         <div class="modal bg-white rounded-xl w-full max-w-md p-8 text-center border border-gray-200">
             <span class="material-symbols-outlined text-5xl text-red-500 mx-auto mb-6">warning</span>
@@ -611,7 +610,7 @@
             </div>
         </div>
     </div>
-    <!-- EXPORT CONFIRM MODAL -->
+    EXPORT CONFIRM MODAL
     <div id="export-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
         <div class="modal bg-white rounded-xl w-full max-w-md p-8 text-center border border-gray-200">
             <span class="material-symbols-outlined text-5xl text-blue-600 mx-auto mb-6">picture_as_pdf</span>
@@ -625,7 +624,19 @@
             </div>
         </div>
     </div>
-    <!-- TOAST -->
+    <!-- LOGOUT CONFIRM MODAL -->
+    <div id="logout-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+        <div class="modal bg-white rounded-xl w-full max-w-md p-8 text-center border border-gray-200 shadow-2xl">
+            <span class="material-symbols-outlined text-5xl text-amber-500 mx-auto mb-6">logout</span>
+            <h3 class="text-2xl font-semibold mb-2 text-gray-900">Logout?</h3>
+            <p class="text-gray-500 mb-8">Are you sure you want to logout from the system?</p>
+            <div class="flex gap-3 flex-col sm:flex-row">
+                <button onclick="hideLogoutModal()" class="px-6 py-2.5 font-600 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors text-sm order-2 sm:order-1">Cancel</button>
+                <button onclick="confirmLogout()" class="px-6 py-2.5 font-600 text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors text-sm order-1 sm:order-2">Yes, Logout</button>
+            </div>
+        </div>
+    </div>
+    TOAST
     <div id="toast" class="hidden fixed bottom-6 right-6 px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 toast bg-gray-800 text-white">
         <i id="toast-icon" class="text-lg"></i>
         <span id="toast-message" class="font-500 text-sm"></span>

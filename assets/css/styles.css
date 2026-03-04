@@ -36,7 +36,7 @@
     scroll-behavior: smooth;
 }
 
-/* ============= PROFESSIONAL BADGES & SPANS ============= */
+PROFESSIONAL BADGES & SPANS 
 .badge, .status-badge, [class*="badge"] {
     display: inline-flex;
     align-items: center;
@@ -104,7 +104,7 @@
     transform: translateY(-1px);
 }
 
-/* Entity type badges */
+Entity type badges
 .badge-residential {
     background: linear-gradient(135deg, rgb(237 233 254) 0%, rgb(218 165 255) 100%);
     color: rgb(109 40 217);
@@ -157,7 +157,7 @@
     transform: translateY(-1px);
 }
 
-/* Action badges */
+Action badges
 .badge-create, .badge-CREATE {
     background: linear-gradient(135deg, rgb(220 252 231) 0%, rgb(187 247 208) 100%);
     color: rgb(22 163 74);
@@ -195,7 +195,7 @@
     transform: translateY(-1px);
 }
 
-/* ============= PROFESSIONAL PROGRESS BARS ============= */
+ PROFESSIONAL PROGRESS BARS 
 .progress-bar {
     height: 6px;
     background: linear-gradient(90deg, rgb(243 244 246) 0%, rgb(229 231 235) 100%);
@@ -224,7 +224,7 @@
     border-radius: 3px;
 }
 
-/* Colored progress bars */
+Colored progress bars
 .progress-primary .progress-bar-fill {
     background: linear-gradient(90deg, rgb(30 58 138) 0%, rgb(37 99 235) 100%);
     box-shadow: 0 1px 3px rgba(30 58 138, 0.3);
@@ -245,7 +245,7 @@
     box-shadow: 0 1px 3px rgba(220 38 38, 0.3);
 }
 
-/* ============= PROFESSIONAL BACKGROUNDS ============= */
+PROFESSIONAL BACKGROUNDS
 
 .tail-container {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -260,7 +260,7 @@ body.tail-container {
     background-attachment: fixed;
 }
 
-/* Content area background */
+Content area background
 #main-app {
     background: linear-gradient(to right, 
         rgb(248, 249, 250) 0%,
@@ -340,7 +340,7 @@ table {
     margin-top: 0.25rem;
 }
 
-/* Professional login screen */
+Professional login screen
 #login-screen {
     background: linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--primary-dark)) 100%);
     position: relative;
@@ -364,7 +364,7 @@ table {
     z-index: 2;
 }
 
-/* Professional sidebar styling */
+Professional sidebar styling
 .professional-sidebar {
     background: linear-gradient(180deg, #ffffff 0%, rgb(249 250 251) 100%);
     border-right: 1px solid rgba(229, 231, 235, 0.5);
@@ -379,7 +379,7 @@ table {
     width: 4.5rem; /* 18 */
 }
 
-/* collapse icon rotates */
+collapse icon rotates
 .sidebar-collapse-btn {
     position: absolute;
     top: 0.75rem;
@@ -407,7 +407,7 @@ table {
     }
 }
 
-/* hide text when collapsed */
+hide text when collapsed
 .professional-sidebar.collapsed .flex-1,
 .professional-sidebar.collapsed .nav-link span,
 .professional-sidebar.collapsed .sidebar-header p {
@@ -493,7 +493,7 @@ table {
     transform: scaleY(1);
 }
 
-/* Professional header */
+Professional header
 .professional-header {
     background: linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--primary-dark)) 100%);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -502,7 +502,7 @@ table {
     color: white;
 }
 
-/* Modern stat cards */
+Modern stat cards
 .stat-card {
     background: linear-gradient(135deg, #ffffff 0%, rgb(249 250 251) 100%);
     border: 1px solid rgba(229 231 235, 0.6);
@@ -518,7 +518,7 @@ table {
     background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
 }
 
-/* Welcome banner background */
+Welcome banner background
 .welcome-banner {
     background: linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--primary-dark)) 100%);
     border-radius: 1rem;
@@ -543,7 +543,7 @@ table {
     z-index: 2;
 }
 
-/* Professional card styling */
+Professional card styling
 .card-professional {
     background: linear-gradient(135deg, #ffffff 0%, rgb(249 250 251) 100%);
     border: 1px solid rgba(229 231 235, 0.6);
@@ -1104,4 +1104,66 @@ textarea:focus {
     background: linear-gradient(90deg, rgb(30 58 138) 0%, rgb(37 99 235) 100%);
     transform: scaleX(0);
     transition: transform 0.3s ease;
+}
+/* ============= RESPONSIVE DESIGN ENHANCEMENTS ============= */
+
+/* Mobile-optimized button sizes for touch */
+@media (max-width: 640px) {
+    button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .btn-primary,
+    .logout-btn,
+    input[type="button"],
+    input[type="submit"],
+    .modal button {
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    /* Improve spacing on mobile */
+    .modal {
+        margin: 1rem;
+    }
+    
+    .section {
+        padding: 0.5rem;
+    }
+    
+    /* Better touch targets for icons */
+    .material-symbols-outlined {
+        min-width: 24px;
+        min-height: 24px;
+    }
+}
+
+/* Tablet and larger screens */
+@media (min-width: 641px) {
+    /* Optimize spacing for larger screens */
+    .card-professional {
+        padding: 2rem;
+    }
+}
+
+/* Large screens */
+@media (min-width: 1024px) {
+    .sidebar-nav {
+        scrollbar-width: thin;
+        scrollbar-color: rgb(59 130 246) rgb(30 58 138);
+    }
+    
+    .sidebar-nav::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .sidebar-nav::-webkit-scrollbar-track {
+        background: rgb(30 58 138);
+    }
+    
+    .sidebar-nav::-webkit-scrollbar-thumb {
+        background: rgb(59 130 246);
+        border-radius: 3px;
+    }
 }

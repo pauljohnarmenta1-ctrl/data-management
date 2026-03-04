@@ -158,6 +158,23 @@ function logout() {
     }
 }
 
+function showLogoutModal() {
+    document.getElementById('logout-modal').classList.remove('hidden');
+}
+
+function hideLogoutModal() {
+    document.getElementById('logout-modal').classList.add('hidden');
+}
+
+function confirmLogout() {
+    hideLogoutModal();
+    document.getElementById('main-app').classList.add('hidden');
+    document.getElementById('login-screen').classList.remove('hidden');
+    document.getElementById('password').value = '';
+    localStorage.removeItem('ma_user');
+    showToast('You have been logged out successfully', 'success');
+}
+
 // sidebar collapse/expand
 function toggleSidebar() {
     const sidebar = document.querySelector('.professional-sidebar');
