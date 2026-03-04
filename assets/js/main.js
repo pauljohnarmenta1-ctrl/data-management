@@ -938,5 +938,8 @@ window.onload = () => {
     if (propertyRecords.length === 0) getSampleData();
     saveToLocalStorage();
     document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-PH', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+    // Initialize dashboard
+    updateDashboardStats();
+    renderRecentActivity();
     console.log('%c🚀 Municipal Assessor Management System ready!', 'color:#1e3a8a; font-weight:700');
 };
