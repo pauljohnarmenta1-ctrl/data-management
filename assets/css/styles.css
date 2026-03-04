@@ -16,236 +16,11 @@
     --gray-200: 229 231 235;
     --gray-700: 55 65 81;
     --gray-900: 17 24 39;
-    
-    /* Professional badge colors */
-    --badge-blue-bg: 219 234 254;
-    --badge-blue-text: 30 58 138;
-    --badge-green-bg: 220 252 231;
-    --badge-green-text: 22 163 74;
-    --badge-red-bg: 254 226 226;
-    --badge-red-text: 220 38 38;
-    --badge-amber-bg: 254 243 199;
-    --badge-amber-text: 180 83 9;
-    --badge-purple-bg: 237 233 254;
-    --badge-purple-text: 109 40 217;
-    --badge-indigo-bg: 224 231 255;
-    --badge-indigo-text: 67 56 202;
 }
 
 * {
     scroll-behavior: smooth;
 }
-
-PROFESSIONAL BADGES & SPANS 
-.badge, .status-badge, [class*="badge"] {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    transition: all 0.2s ease;
-    border: 1px solid transparent;
-    white-space: nowrap;
-}
-
-/* Status badges */
-.badge-completed, .status-completed {
-    background: linear-gradient(135deg, rgb(220 252 231) 0%, rgb(187 247 208) 100%);
-    color: rgb(22 163 74);
-    border-color: rgba(22 163 74, 0.2);
-    box-shadow: 0 2px 4px rgba(22 163 74, 0.1);
-}
-
-.badge-completed:hover, .status-completed:hover {
-    background: linear-gradient(135deg, rgb(187 247 208) 0%, rgb(134 239 172) 100%);
-    box-shadow: 0 4px 12px rgba(22 163 74, 0.2);
-    transform: translateY(-1px);
-}
-
-.badge-pending, .status-pending {
-    background: linear-gradient(135deg, rgb(254 243 199) 0%, rgb(253 224 71) 100%);
-    color: rgb(180 83 9);
-    border-color: rgba(180 83 9, 0.2);
-    box-shadow: 0 2px 4px rgba(180 83 9, 0.1);
-}
-
-.badge-pending:hover, .status-pending:hover {
-    background: linear-gradient(135deg, rgb(253 224 71) 0%, rgb(251 191 36) 100%);
-    box-shadow: 0 4px 12px rgba(180 83 9, 0.2);
-    transform: translateY(-1px);
-}
-
-.badge-processing, .status-updating, .badge-updated {
-    background: linear-gradient(135deg, rgb(219 234 254) 0%, rgb(191 219 254) 100%);
-    color: rgb(30 58 138);
-    border-color: rgba(30 58 138, 0.2);
-    box-shadow: 0 2px 4px rgba(30 58 138, 0.1);
-}
-
-.badge-processing:hover, .status-updating:hover, .badge-updated:hover {
-    background: linear-gradient(135deg, rgb(191 219 254) 0%, rgb(147 197 253) 100%);
-    box-shadow: 0 4px 12px rgba(30 58 138, 0.2);
-    transform: translateY(-1px);
-}
-
-.badge-released, .status-released {
-    background: linear-gradient(135deg, rgb(220 252 231) 0%, rgb(187 247 208) 100%);
-    color: rgb(22 163 74);
-    border-color: rgba(22 163 74, 0.2);
-    box-shadow: 0 2px 4px rgba(22 163 74, 0.1);
-}
-
-.badge-released:hover, .status-released:hover {
-    background: linear-gradient(135deg, rgb(187 247 208) 0%, rgb(134 239 172) 100%);
-    box-shadow: 0 4px 12px rgba(22 163 74, 0.2);
-    transform: translateY(-1px);
-}
-
-Entity type badges
-.badge-residential {
-    background: linear-gradient(135deg, rgb(237 233 254) 0%, rgb(218 165 255) 100%);
-    color: rgb(109 40 217);
-    border-color: rgba(109 40 217, 0.2);
-    box-shadow: 0 2px 4px rgba(109 40 217, 0.1);
-}
-
-.badge-residential:hover {
-    background: linear-gradient(135deg, rgb(218 165 255) 0%, rgb(196 181 253) 100%);
-    box-shadow: 0 4px 12px rgba(109 40 217, 0.2);
-    transform: translateY(-1px);
-}
-
-.badge-commercial {
-    background: linear-gradient(135deg, rgb(254 243 199) 0%, rgb(253 224 71) 100%);
-    color: rgb(180 83 9);
-    border-color: rgba(180 83 9, 0.2);
-    box-shadow: 0 2px 4px rgba(180 83 9, 0.1);
-}
-
-.badge-commercial:hover {
-    background: linear-gradient(135deg, rgb(253 224 71) 0%, rgb(251 191 36) 100%);
-    box-shadow: 0 4px 12px rgba(180 83 9, 0.2);
-    transform: translateY(-1px);
-}
-
-.badge-agricultural {
-    background: linear-gradient(135deg, rgb(220 252 231) 0%, rgb(187 247 208) 100%);
-    color: rgb(22 163 74);
-    border-color: rgba(22 163 74, 0.2);
-    box-shadow: 0 2px 4px rgba(22 163 74, 0.1);
-}
-
-.badge-agricultural:hover {
-    background: linear-gradient(135deg, rgb(187 247 208) 0%, rgb(134 239 172) 100%);
-    box-shadow: 0 4px 12px rgba(22 163 74, 0.2);
-    transform: translateY(-1px);
-}
-
-.badge-industrial {
-    background: linear-gradient(135deg, rgb(224 231 255) 0%, rgb(199 210 254) 100%);
-    color: rgb(67 56 202);
-    border-color: rgba(67 56 202, 0.2);
-    box-shadow: 0 2px 4px rgba(67 56 202, 0.1);
-}
-
-.badge-industrial:hover {
-    background: linear-gradient(135deg, rgb(199 210 254) 0%, rgb(165 180 252) 100%);
-    box-shadow: 0 4px 12px rgba(67 56 202, 0.2);
-    transform: translateY(-1px);
-}
-
-Action badges
-.badge-create, .badge-CREATE {
-    background: linear-gradient(135deg, rgb(220 252 231) 0%, rgb(187 247 208) 100%);
-    color: rgb(22 163 74);
-    border-color: rgba(22 163 74, 0.2);
-    box-shadow: 0 2px 4px rgba(22 163 74, 0.1);
-}
-
-.badge-create:hover, .badge-CREATE:hover {
-    box-shadow: 0 4px 12px rgba(22 163 74, 0.2);
-    transform: translateY(-1px);
-}
-
-.badge-update, .badge-UPDATE {
-    background: linear-gradient(135deg, rgb(219 234 254) 0%, rgb(191 219 254) 100%);
-    color: rgb(30 58 138);
-    border-color: rgba(30 58 138, 0.2);
-    box-shadow: 0 2px 4px rgba(30 58 138, 0.1);
-}
-
-.badge-update:hover, .badge-UPDATE:hover {
-    box-shadow: 0 4px 12px rgba(30 58 138, 0.2);
-    transform: translateY(-1px);
-}
-
-.badge-delete, .badge-DELETE {
-    background: linear-gradient(135deg, rgb(254 226 226) 0%, rgb(252 165 165) 100%);
-    color: rgb(220 38 38);
-    border-color: rgba(220 38 38, 0.2);
-    box-shadow: 0 2px 4px rgba(220 38 38, 0.1);
-}
-
-.badge-delete:hover, .badge-DELETE:hover {
-    background: linear-gradient(135deg, rgb(252 165 165) 0%, rgb(248 113 113) 100%);
-    box-shadow: 0 4px 12px rgba(220 38 38, 0.2);
-    transform: translateY(-1px);
-}
-
- PROFESSIONAL PROGRESS BARS 
-.progress-bar {
-    height: 6px;
-    background: linear-gradient(90deg, rgb(243 244 246) 0%, rgb(229 231 235) 100%);
-    border-radius: 3px;
-    overflow: hidden;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, rgb(34 197 94) 0%, rgb(22 163 74) 100%);
-    border-radius: 3px;
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 1px 3px rgba(34 197 94, 0.3);
-    position: relative;
-}
-
-.progress-bar-fill::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
-    border-radius: 3px;
-}
-
-Colored progress bars
-.progress-primary .progress-bar-fill {
-    background: linear-gradient(90deg, rgb(30 58 138) 0%, rgb(37 99 235) 100%);
-    box-shadow: 0 1px 3px rgba(30 58 138, 0.3);
-}
-
-.progress-success .progress-bar-fill {
-    background: linear-gradient(90deg, rgb(22 163 74) 0%, rgb(34 197 94) 100%);
-    box-shadow: 0 1px 3px rgba(22 163 74, 0.3);
-}
-
-.progress-warning .progress-bar-fill {
-    background: linear-gradient(90deg, rgb(180 83 9) 0%, rgb(245 158 11) 100%);
-    box-shadow: 0 1px 3px rgba(180 83 9, 0.3);
-}
-
-.progress-danger .progress-bar-fill {
-    background: linear-gradient(90deg, rgb(220 38 38) 0%, rgb(239 68 68) 100%);
-    box-shadow: 0 1px 3px rgba(220 38 38, 0.3);
-}
-
-PROFESSIONAL BACKGROUNDS
 
 .tail-container {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -260,7 +35,7 @@ body.tail-container {
     background-attachment: fixed;
 }
 
-Content area background
+/* Content area background */
 #main-app {
     background: linear-gradient(to right, 
         rgb(248, 249, 250) 0%,
@@ -340,7 +115,7 @@ table {
     margin-top: 0.25rem;
 }
 
-Professional login screen
+/* Professional login screen */
 #login-screen {
     background: linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--primary-dark)) 100%);
     position: relative;
@@ -364,7 +139,7 @@ Professional login screen
     z-index: 2;
 }
 
-Professional sidebar styling
+/* Professional sidebar styling */
 .professional-sidebar {
     background: linear-gradient(180deg, #ffffff 0%, rgb(249 250 251) 100%);
     border-right: 1px solid rgba(229, 231, 235, 0.5);
@@ -379,7 +154,7 @@ Professional sidebar styling
     width: 4.5rem; /* 18 */
 }
 
-collapse icon rotates
+/* collapse icon rotates */
 .sidebar-collapse-btn {
     position: absolute;
     top: 0.75rem;
@@ -407,7 +182,7 @@ collapse icon rotates
     }
 }
 
-hide text when collapsed
+/* hide text when collapsed */
 .professional-sidebar.collapsed .flex-1,
 .professional-sidebar.collapsed .nav-link span,
 .professional-sidebar.collapsed .sidebar-header p {
@@ -493,7 +268,7 @@ hide text when collapsed
     transform: scaleY(1);
 }
 
-Professional header
+/* Professional header */
 .professional-header {
     background: linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--primary-dark)) 100%);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -502,7 +277,7 @@ Professional header
     color: white;
 }
 
-Modern stat cards
+/* Modern stat cards */
 .stat-card {
     background: linear-gradient(135deg, #ffffff 0%, rgb(249 250 251) 100%);
     border: 1px solid rgba(229 231 235, 0.6);
@@ -518,7 +293,7 @@ Modern stat cards
     background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
 }
 
-Welcome banner background
+/* Welcome banner background */
 .welcome-banner {
     background: linear-gradient(135deg, rgb(var(--primary)) 0%, rgb(var(--primary-dark)) 100%);
     border-radius: 1rem;
@@ -543,7 +318,7 @@ Welcome banner background
     z-index: 2;
 }
 
-Professional card styling
+/* Professional card styling */
 .card-professional {
     background: linear-gradient(135deg, #ffffff 0%, rgb(249 250 251) 100%);
     border: 1px solid rgba(229 231 235, 0.6);
@@ -602,39 +377,18 @@ Professional card styling
     background: linear-gradient(135deg, rgba(var(--primary), 0.15) 0%, rgba(var(--primary), 0.08) 100%);
     color: rgb(var(--primary));
     border: 1px solid rgba(var(--primary), 0.1);
-    transition: all 0.2s ease;
-}
-
-.icon-bg-primary:hover {
-    background: linear-gradient(135deg, rgba(var(--primary), 0.25) 0%, rgba(var(--primary), 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(var(--primary), 0.15);
-    transform: translateY(-2px);
 }
 
 .icon-bg-success {
     background: linear-gradient(135deg, rgba(var(--success), 0.15) 0%, rgba(var(--success), 0.08) 100%);
     color: rgb(var(--success));
     border: 1px solid rgba(var(--success), 0.1);
-    transition: all 0.2s ease;
-}
-
-.icon-bg-success:hover {
-    background: linear-gradient(135deg, rgba(var(--success), 0.25) 0%, rgba(var(--success), 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(var(--success), 0.15);
-    transform: translateY(-2px);
 }
 
 .icon-bg-warning {
     background: linear-gradient(135deg, rgba(var(--warning), 0.15) 0%, rgba(var(--warning), 0.08) 100%);
     color: rgb(var(--warning));
     border: 1px solid rgba(var(--warning), 0.1);
-    transition: all 0.2s ease;
-}
-
-.icon-bg-warning:hover {
-    background: linear-gradient(135deg, rgba(var(--warning), 0.25) 0%, rgba(var(--warning), 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(var(--warning), 0.15);
-    transform: translateY(-2px);
 }
 
 /* Professional button styling for action buttons */
@@ -757,413 +511,4 @@ Professional card styling
         rgb(var(--primary)) 0%,
         rgb(var(--primary-dark)) 100%);
     border-radius: 0.75rem 0.75rem 0 0;
-}
-
-/* ============= PROFESSIONAL TABLE & LIST STYLING ============= */
-table tbody tr {
-    border-bottom: 1px solid rgba(229, 231, 235, 0.6);
-    transition: all 0.2s ease;
-}
-
-table tbody tr:hover {
-    background: linear-gradient(90deg, rgba(249, 250, 251, 0.5) 0%, rgba(219, 234, 254, 0.3) 100%);
-}
-
-table th {
-    background: linear-gradient(135deg, rgb(249, 250, 251) 0%, rgb(243, 244, 246) 100%);
-    border-bottom: 2px solid rgb(229, 231, 235);
-    transition: all 0.2s ease;
-}
-
-table th:hover {
-    background: linear-gradient(135deg, rgb(243, 244, 246) 0%, rgb(229, 231, 235) 100%);
-}
-
-/* ============= PROFESSIONAL BACKGROUNDS ============= */
-.bg-gradient-primary {
-    background: linear-gradient(135deg, rgb(30 58 138) 0%, rgb(37 99 235) 100%);
-}
-
-.bg-gradient-success {
-    background: linear-gradient(135deg, rgb(22 163 74) 0%, rgb(34 197 94) 100%);
-}
-
-.bg-gradient-warning {
-    background: linear-gradient(135deg, rgb(180 83 9) 0%, rgb(245 158 11) 100%);
-}
-
-.bg-gradient-danger {
-    background: linear-gradient(135deg, rgb(220 38 38) 0%, rgb(239 68 68) 100%);
-}
-
-.bg-gradient-purple {
-    background: linear-gradient(135deg, rgb(109 40 217) 0%, rgb(139 92 246) 100%);
-}
-
-.bg-gradient-indigo {
-    background: linear-gradient(135deg, rgb(67 56 202) 0%, rgb(99 102 241) 100%);
-}
-
-/* Soft backgrounds for cards */
-.bg-soft-primary {
-    background: linear-gradient(135deg, rgba(30 58 138, 0.08) 0%, rgba(37 99 235, 0.04) 100%);
-}
-
-.bg-soft-success {
-    background: linear-gradient(135deg, rgba(22 163 74, 0.08) 0%, rgba(34 197 94, 0.04) 100%);
-}
-
-.bg-soft-warning {
-    background: linear-gradient(135deg, rgba(180 83 9, 0.08) 0%, rgba(245 158 11, 0.04) 100%);
-}
-
-.bg-soft-danger {
-    background: linear-gradient(135deg, rgba(220 38 38, 0.08) 0%, rgba(239 68 68, 0.04) 100%);
-}
-
-/* ============= PROFESSIONAL BORDERS ============= */
-.border-primary {
-    border: 1px solid rgba(30 58 138, 0.2);
-}
-
-.border-success {
-    border: 1px solid rgba(22 163 74, 0.2);
-}
-
-.border-warning {
-    border: 1px solid rgba(180 83 9, 0.2);
-}
-
-.border-danger {
-    border: 1px solid rgba(220 38 38, 0.2);
-}
-
-.border-top-primary {
-    border-top: 3px solid rgb(30 58 138);
-}
-
-.border-top-success {
-    border-top: 3px solid rgb(22 163 74);
-}
-
-.border-top-warning {
-    border-top: 3px solid rgb(180 83 9);
-}
-
-.border-top-danger {
-    border-top: 3px solid rgb(220 38 38);
-}
-
-.border-left-primary {
-    border-left: 4px solid rgb(30 58 138);
-    padding-left: calc(1rem - 4px);
-}
-
-.border-left-success {
-    border-left: 4px solid rgb(22 163 74);
-    padding-left: calc(1rem - 4px);
-}
-
-.border-left-warning {
-    border-left: 4px solid rgb(180 83 9);
-    padding-left: calc(1rem - 4px);
-}
-
-.border-left-danger {
-    border-left: 4px solid rgb(220 38 38);
-    padding-left: calc(1rem - 4px);
-}
-
-/* ============= PROFESSIONAL ICON BACKGROUNDS ============= */
-.icon-bg {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    transition: all 0.2s ease;
-}
-
-.icon-bg.primary {
-    background: linear-gradient(135deg, rgba(30 58 138, 0.15) 0%, rgba(37 99 235, 0.08) 100%);
-    color: rgb(30 58 138);
-    border: 1px solid rgba(30 58 138, 0.1);
-}
-
-.icon-bg.primary:hover {
-    background: linear-gradient(135deg, rgba(30 58 138, 0.25) 0%, rgba(37 99 235, 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(30 58 138, 0.15);
-}
-
-.icon-bg.success {
-    background: linear-gradient(135deg, rgba(22 163 74, 0.15) 0%, rgba(34 197 94, 0.08) 100%);
-    color: rgb(22 163 74);
-    border: 1px solid rgba(22 163 74, 0.1);
-}
-
-.icon-bg.success:hover {
-    background: linear-gradient(135deg, rgba(22 163 74, 0.25) 0%, rgba(34 197 94, 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(22 163 74, 0.15);
-}
-
-.icon-bg.warning {
-    background: linear-gradient(135deg, rgba(180 83 9, 0.15) 0%, rgba(245 158 11, 0.08) 100%);
-    color: rgb(180 83 9);
-    border: 1px solid rgba(180 83 9, 0.1);
-}
-
-.icon-bg.warning:hover {
-    background: linear-gradient(135deg, rgba(180 83 9, 0.25) 0%, rgba(245 158 11, 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(180 83 9, 0.15);
-}
-
-.icon-bg.danger {
-    background: linear-gradient(135deg, rgba(220 38 38, 0.15) 0%, rgba(239 68 68, 0.08) 100%);
-    color: rgb(220 38 38);
-    border: 1px solid rgba(220 38 38, 0.1);
-}
-
-.icon-bg.danger:hover {
-    background: linear-gradient(135deg, rgba(220 38 38, 0.25) 0%, rgba(239 68 68, 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(220 38 38, 0.15);
-}
-
-.icon-bg.purple {
-    background: linear-gradient(135deg, rgba(109 40 217, 0.15) 0%, rgba(139 92 246, 0.08) 100%);
-    color: rgb(109 40 217);
-    border: 1px solid rgba(109 40 217, 0.1);
-}
-
-.icon-bg.purple:hover {
-    background: linear-gradient(135deg, rgba(109 40 217, 0.25) 0%, rgba(139 92 246, 0.15) 100%);
-    box-shadow: 0 4px 12px rgba(109 40 217, 0.15);
-}
-
-/* ============= PROFESSIONAL SHADOWS ============= */
-.shadow-xs {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.shadow-sm {
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.shadow-md {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.shadow-lg {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-.shadow-xl {
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-.shadow-colored-primary {
-    box-shadow: 0 4px 20px rgba(30 58 138, 0.15);
-}
-
-.shadow-colored-success {
-    box-shadow: 0 4px 20px rgba(22 163 74, 0.15);
-}
-
-.shadow-colored-warning {
-    box-shadow: 0 4px 20px rgba(180 83 9, 0.15);
-}
-
-.shadow-colored-danger {
-    box-shadow: 0 4px 20px rgba(220 38 38, 0.15);
-}
-
-/* ============= PROFESSIONAL DIVIDERS ============= */
-.divider {
-    height: 1px;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(229, 231, 235, 0.5) 50%,
-        transparent 100%);
-    margin: 1rem 0;
-}
-
-.divider-bold {
-    height: 2px;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgb(229, 231, 235) 50%,
-        transparent 100%);
-    margin: 1rem 0;
-}
-
-/* ============= PROFESSIONAL PILLS & TAGS ============= */
-.pill, .tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.375rem 0.75rem;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    border: 1px solid transparent;
-}
-
-.pill-primary, .tag-primary {
-    background: linear-gradient(135deg, rgb(219 234 254) 0%, rgb(191 219 254) 100%);
-    color: rgb(30 58 138);
-    border-color: rgba(30 58 138, 0.2);
-}
-
-.pill-primary:hover, .tag-primary:hover {
-    background: linear-gradient(135deg, rgb(191 219 254) 0%, rgb(147 197 253) 100%);
-    transform: translateY(-1px);
-}
-
-.pill-success, .tag-success {
-    background: linear-gradient(135deg, rgb(220 252 231) 0%, rgb(187 247 208) 100%);
-    color: rgb(22 163 74);
-    border-color: rgba(22 163 74, 0.2);
-}
-
-.pill-success:hover, .tag-success:hover {
-    background: linear-gradient(135deg, rgb(187 247 208) 0%, rgb(134 239 172) 100%);
-    transform: translateY(-1px);
-}
-
-.pill-warning, .tag-warning {
-    background: linear-gradient(135deg, rgb(254 243 199) 0%, rgb(253 224 71) 100%);
-    color: rgb(180 83 9);
-    border-color: rgba(180 83 9, 0.2);
-}
-
-.pill-warning:hover, .tag-warning:hover {
-    background: linear-gradient(135deg, rgb(253 224 71) 0%, rgb(251 191 36) 100%);
-    transform: translateY(-1px);
-}
-
-.pill-danger, .tag-danger {
-    background: linear-gradient(135deg, rgb(254 226 226) 0%, rgb(252 165 165) 100%);
-    color: rgb(220 38 38);
-    border-color: rgba(220 38 38, 0.2);
-}
-
-.pill-danger:hover, .tag-danger:hover {
-    background: linear-gradient(135deg, rgb(252 165 165) 0%, rgb(248 113 113) 100%);
-    transform: translateY(-1px);
-}
-
-/* ============= PROFESSIONAL FORM ELEMENTS ============= */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
-select,
-textarea {
-    transition: all 0.2s ease;
-    border: 1.5px solid rgba(229, 231, 235, 0.8);
-    background: linear-gradient(135deg, #ffffff 0%, rgb(249 250 251) 100%);
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="date"]:focus,
-select:focus,
-textarea:focus {
-    border-color: rgb(30 58 138);
-    box-shadow: 0 0 0 3px rgba(30 58 138, 0.1), 0 0 0 1.5px rgb(30 58 138);
-    outline: none;
-}
-
-/* ============= PROFESSIONAL TEXT & TYPOGRAPHY ============= */
-.text-gradient-primary {
-    background: linear-gradient(135deg, rgb(30 58 138) 0%, rgb(37 99 235) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.text-gradient-success {
-    background: linear-gradient(135deg, rgb(22 163 74) 0%, rgb(34 197 94) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.underline-gradient {
-    position: relative;
-    display: inline-block;
-}
-
-.underline-gradient::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, rgb(30 58 138) 0%, rgb(37 99 235) 100%);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-/* ============= RESPONSIVE DESIGN ENHANCEMENTS ============= */
-
-/* Mobile-optimized button sizes for touch */
-@media (max-width: 640px) {
-    button {
-        min-height: 44px;
-        min-width: 44px;
-    }
-    
-    .btn-primary,
-    .logout-btn,
-    input[type="button"],
-    input[type="submit"],
-    .modal button {
-        padding: 0.75rem 1rem;
-        font-size: 0.95rem;
-    }
-    
-    /* Improve spacing on mobile */
-    .modal {
-        margin: 1rem;
-    }
-    
-    .section {
-        padding: 0.5rem;
-    }
-    
-    /* Better touch targets for icons */
-    .material-symbols-outlined {
-        min-width: 24px;
-        min-height: 24px;
-    }
-}
-
-/* Tablet and larger screens */
-@media (min-width: 641px) {
-    /* Optimize spacing for larger screens */
-    .card-professional {
-        padding: 2rem;
-    }
-}
-
-/* Large screens */
-@media (min-width: 1024px) {
-    .sidebar-nav {
-        scrollbar-width: thin;
-        scrollbar-color: rgb(59 130 246) rgb(30 58 138);
-    }
-    
-    .sidebar-nav::-webkit-scrollbar {
-        width: 6px;
-    }
-    
-    .sidebar-nav::-webkit-scrollbar-track {
-        background: rgb(30 58 138);
-    }
-    
-    .sidebar-nav::-webkit-scrollbar-thumb {
-        background: rgb(59 130 246);
-        border-radius: 3px;
-    }
 }
