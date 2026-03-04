@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Municipal Assessor Management System</title>
+    <!-- Tailwind with custom theme -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#1E3A8A',
+              'primary-dark': '#16266e',
+              accentGreen: '#10B981',
+              accentOrange: '#F59E0B',
+              accentPurple: '#8B5CF6',
+              softGray: '#F8FAFC'
+            },
+            fontFamily: {
+              sans: ['Poppins', 'sans-serif'],
+            },
+            borderRadius: {
+              xl: '12px',
+              '2xl': '16px'
+            },
+            boxShadow: {
+              soft: '0 2px 10px rgba(0,0,0,0.05)'
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Google Material Symbols for icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest/dist/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body class="tail-container bg-softGray text-gray-800 font-sans">
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="min-h-screen flex items-center justify-center">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-10 border border-gray-100">
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-2xl mb-8 shadow-lg">
+                    <span class="material-symbols-outlined text-3xl">account_balance</span>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900">Municipal Assessor</h1>
+                <p class="text-gray-500 mt-3 text-sm font-500">Buenavista Management System</p>
+            </div>
+           
+            <div class="space-y-5">
+                <div>
+                    <label class="block text-sm font-600 text-gray-700 mb-2">Username</label>
+                    <input id="username" type="text"
+                           class="w-full px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50"
+                           placeholder="admin" value="admin">
+                </div>
+               
+                <div>
+                    <label class="block text-sm font-600 text-gray-700 mb-2">Password</label>
+                    <div class="relative">
+                        <input id="password" type="password"
+                               class="w-full px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50"
+                               placeholder="••••••••" value="admin">
+                        <button onclick="togglePassword()"
+                                class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+                            <span id="eye-icon" class="material-symbols-outlined text-lg">visibility</span>
+                        </button>
+                    </div>
+                </div>
+               
+                <button onclick="handleLogin()"
+                        class="w-full btn-primary text-white font-600 py-3 rounded-lg transition-all active:scale-95">
+                    Sign In
+                </button>
+               
+                <a onclick="forgotPassword()" class="block text-center text-blue-600 text-sm hover:text-blue-700 font-500 cursor-pointer transition-colors">Forgot password?</a>
+               
+                <div id="login-error" class="hidden text-red-600 text-sm text-center mt-4 font-500"></div>
+            </div>
+           
+            <div class="text-center text-xs text-gray-400 mt-12 font-500">
+                Municipality of Buenavista © 2026
+            </div>
+        </div>
+    </div>
+    <!-- MAIN APP -->
+    <div id="main-app" class="hidden h-screen flex overflow-hidden bg-gray-50">
+        <!-- SIDEBAR -->
+        <div class="w-72 professional-sidebar flex flex-col bg-gradient-to-b from-blue-900 via-blue-800 to-blue-900 shadow-xl">
+            <!-- Logo -->
+            <div class="sidebar-header relative px-8 py-8 flex items-center gap-3 bg-blue-950 border-b border-blue-700">
+                <div class="w-14 h-14 bg-white text-blue-600 rounded-2xl flex items-center justify-center font-bold text-2xl shadow-md transform hover:scale-105 transition-transform">
+                    <span class="material-symbols-outlined text-2xl">account_balance</span>
+                </div>
+                <div class="flex-1">
+                    <h2 class="font-bold text-2xl text-white tracking-tight">Assessor</h2>
+                    <p class="text-[11px] text-blue-100 -mt-1 font-500">Municipal Management System</p>
+                </div>
+                <button id="sidebar-toggle" class="sidebar-collapse-btn" onclick="toggleSidebar()">
+                    <span class="material-symbols-outlined w-4 h-4 text-green-200">chevron_left</span>
+                </button>
+            </div>
+           
+            <!-- Navigation -->
+            <div class="flex-1 px-4 py-8 overflow-y-auto sidebar-nav bg-gradient-to-b from-blue-500 via-blue-800 to-blue-500">
+                <nav class="space-y-1">
+                    <a onclick="navigateTo('dashboard')" id="nav-dashboard"
+                       class="nav-link active flex items-center gap-3 px-5 py-3.5 text-white bg-blue-700 rounded-lg cursor-pointer hover:bg-blue-600 transition-colors">
+                        <span class="material-symbols-outlined w-5 h-5">trending_up</span>
+                        <span class="font-600 text-sm">Dashboard</span>
+                    </a>
+                    <a onclick="navigateTo('property-records')" id="nav-property-records"
+                       class="nav-link flex items-center gap-3 px-5 py-3.5 text-blue-100 rounded-lg cursor-pointer hover:bg-blue-700 hover:text-white transition-colors">
+                        <span class="material-symbols-outlined w-5 h-5">description</span>
+                        <span class="font-600 text-sm">Property Records</span>
+                    </a>
+                    <a onclick="navigateTo('transactions')" id="nav-transactions"
+                       class="nav-link flex items-center gap-3 px-5 py-3.5 text-blue-100 rounded-lg cursor-pointer hover:bg-blue-700 hover:text-white transition-colors">
+                        <span class="material-symbols-outlined w-5 h-5">swap_horiz</span>
+                        <span class="font-600 text-sm">Transactions</span>
+                    </a>
+                    <a onclick="navigateTo('taxmapping')" id="nav-taxmapping"
+                       class="nav-link flex items-center gap-3 px-5 py-3.5 text-blue-100 rounded-lg cursor-pointer hover:bg-blue-700 hover:text-white transition-colors">
+                        <span class="material-symbols-outlined w-5 h-5">map</span>
+                        <span class="font-600 text-sm">Tax Mapping</span>
+                    </a>
+                    <a onclick="navigateTo('reports')" id="nav-reports"
+                       class="nav-link flex items-center gap-3 px-5 py-3.5 text-blue-100 rounded-lg cursor-pointer hover:bg-blue-700 hover:text-white transition-colors">
+                        <span class="material-symbols-outlined w-5 h-5">bar_chart</span>
+                        <span class="font-600 text-sm">Reports</span>
+                    </a>
+                    <div class="nav-divider mt-6 mb-3"></div>
+                    <div class="px-5 py-2 text-xs font-700 text-blue-300 uppercase tracking-wider">Reference</div>
+                </nav>
+            </div>
+           
+            <!-- Footer -->
+            <div class="sidebar-footer bg-blue-950 border-t border-blue-700 p-4">
+                <button onclick="logout()"
+                        class="logout-btn w-full flex items-center justify-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-600 text-sm transition-colors shadow-md">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+       
+        <!-- MAIN CONTENT -->
+        <div class="flex-1 flex flex-col">
+            <!-- Top Bar -->
+            <header class="professional-header px-8 py-6 flex items-center justify-between bg-gradient-to-r from-blue-700 via-blue-600 to-blue-800 shadow-lg">
+                <div class="flex items-center gap-4 flex-1">
+                    <button class="md:hidden p-2 rounded-md hover:bg-blue-600" onclick="setSidebarMobile(true)">
+                        <span class="material-symbols-outlined w-6 h-6 text-blue-100">menu</span>
+                    </button>
+                    <div>
+                        <h1 id="page-title" class="text-3xl font-bold text-white">Dashboard Overview</h1>
+                        <p id="page-subtitle" class="text-sm text-blue-100 mt-1">Welcome back, Admin</p>
+                    </div>
+                </div>
+               
+                <div class="flex items-center gap-8">
+                    <div class="relative flex-1 max-w-md">
+                        <div class="relative group">
+                        <input id="global-search"
+                            onkeyup="if(event.key === 'Enter') handleGlobalSearch()"
+                            placeholder="Search properties, owners..."
+                            class="w-full bg-blue-100 border border-blue-400 focus:ring-2 focus:ring-white focus:border-transparent pl-11 pr-4 py-2.5 rounded-lg text-sm transition-all shadow-sm group-hover:bg-blue-50">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">search</span>
+                       </div>
+                    </div>
+                   
+                    <div class="flex items-center gap-6">
+                        <button onclick="showNotifications()" class="relative text-blue-100 hover:text-white transition-colors group">
+                            <span class="material-symbols-outlined">notifications</span>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full group-hover:scale-125 transition-transform"></span>
+                        </button>
+                        <div class="h-6 w-px bg-blue-500"></div>
+                        <div id="current-date" class="text-blue-100 text-sm font-500 min-w-max"></div>
+                    </div>
+                   
+                    <div class="flex items-center gap-4 ml-6 pl-6 border-l border-blue-500">
+                        <div class="text-right hidden sm:block">
+                            <div class="font-600 text-sm text-white">Admin Staff</div>
+                            <div class="text-xs text-blue-100">Municipal Assessor</div>
+                        </div>
+                        <div class="w-11 h-11 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-lg flex items-center justify-center font-bold text-sm shadow-md hover:shadow-lg transition-shadow cursor-pointer">
+                            AS
+                        </div>
+                    </div>
+                </div>
+            </header>
+           
+            <!-- Content Area -->
+            <div class="flex-1 overflow-auto p-8 bg-gradient-to-br from-gray-50 via-blue-50/10 to-gray-50">
+               
+                <!-- DASHBOARD SECTION -->
+                <div id="dashboard-section" class="section">
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                        <!-- Total Properties -->
+                        <div onclick="navigateTo('property-records')" class="stat-card card-hover cursor-pointer rounded-xl p-6 flex flex-col justify-between h-40 relative overflow-hidden group">
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-primary"></div>
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-600">Total Properties</p>
+                                    <p id="stat-total" class="text-5xl font-bold text-gray-900 mt-3">0</p>
+                                </div>
+                                <div class="icon-bg-primary rounded-xl p-4 group-hover:scale-110 transition-transform duration-300">
+                                    <span class="material-symbols-outlined text-2xl">domain</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-blue-600 font-600">↑ Records in system</div>
+                        </div>
+                       
+                        <!-- Pending Transactions -->
+                        <div onclick="navigateTo('transactions')" class="stat-card card-hover cursor-pointer rounded-xl p-6 flex flex-col justify-between h-40 relative overflow-hidden group">
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-accentOrange"></div>
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-600">Pending</p>
+                                    <p id="stat-pending" class="text-5xl font-bold text-amber-600 mt-3">0</p>
+                                </div>
+                                <div class="icon-bg-warning rounded-xl p-4 group-hover:scale-110 transition-transform duration-300">
+                                    <span class="material-symbols-outlined text-2xl">schedule</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-amber-600 font-600">⏳ Awaiting action</div>
+                        </div>
+                       
+                        <!-- Completed Documents -->
+                        <div onclick="navigateTo('transactions')" class="stat-card card-hover cursor-pointer rounded-xl p-6 flex flex-col justify-between h-40 relative overflow-hidden group">
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-accentGreen"></div>
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-600">Released</p>
+                                    <p id="stat-released" class="text-5xl font-bold text-green-600 mt-3">0</p>
+                                </div>
+                                <div class="icon-bg-success rounded-xl p-4 group-hover:scale-110 transition-transform duration-300">
+                                    <span class="material-symbols-outlined text-2xl">assignment_turned_in</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-green-600 font-600">✓ Documents released</div>
+                        </div>
+                       
+                        <!-- Completed Appraisals -->
+                        <div onclick="navigateTo('taxmapping')" class="stat-card card-hover cursor-pointer rounded-xl p-6 flex flex-col justify-between h-40 relative overflow-hidden group">
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-accentPurple"></div>
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-600">Appraisals</p>
+                                    <p id="stat-completed" class="text-5xl font-bold text-indigo-600 mt-3">0</p>
+                                </div>
+                                <div class="icon-bg-primary rounded-xl p-4 group-hover:scale-110 transition-transform duration-300">
+                                    <span class="material-symbols-outlined text-2xl">verified</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-indigo-600 font-600">★ Completed</div>
+                        </div>
+                    </div>
+                   
+                    <div class="grid grid-cols-12 gap-6">
+                        <!-- Recent Activity -->
+                        <div class="col-span-8 bg-white rounded-xl p-8 border border-gray-200 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700"></div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <h2 class="text-xl font-bold text-gray-900">Recent Activity</h2>
+                                    <p class="text-sm text-gray-500 mt-1">Latest transactions and updates</p>
+                                </div>
+                                <button onclick="navigateTo('property-records')"
+                                        class="px-4 py-2 bg-blue-50 text-blue-600 font-600 text-sm rounded-lg hover:bg-blue-100 transition-colors flex items-center gap-2">
+                                    View all <span class="material-symbols-outlined text-xs align-middle">arrow_forward</span>
+                                </button>
+                            </div>
+                            <div id="recent-activity" class="space-y-4"></div>
+                        </div>
+                       
+                        <!-- Quick Actions -->
+                        <div class="col-span-4 bg-white rounded-xl p-8 border border-gray-200 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700"></div>
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-900 mb-2">Quick Actions</h2>
+                                <p class="text-sm text-gray-500 mb-6">Common tasks</p>
+                            </div>
+                            <div class="space-y-3">
+                                <button onclick="quickNewProperty()"
+                                        class="quick-action-btn w-full bg-gradient-to-br from-primary/20 to-primary/10 border-2 border-primary hover:border-primary/70 text-primary hover:text-primary/80 font-600 py-3.5 rounded-lg flex items-center justify-center gap-3 transition-all hover:shadow-md hover:shadow-primary-200/50">
+                                    <span class="material-symbols-outlined w-5 h-5">add_circle</span>
+                                    New Property
+                                </button>
+                                <button onclick="quickNewTaxMapping()"
+                                        class="quick-action-btn w-full bg-gradient-to-br from-accentGreen/20 to-accentGreen/10 border-2 border-accentGreen hover:border-accentGreen/70 text-accentGreen hover:text-accentGreen/80 font-600 py-3.5 rounded-lg flex items-center justify-center gap-3 transition-all hover:shadow-md hover:shadow-accentGreen-200/50">
+                                    <span class="material-symbols-outlined w-5 h-5">place</span>
+                                    Tax Mapping
+                                </button>
+                                <button onclick="quickGenerateReport()"
+                                        class="quick-action-btn w-full bg-gradient-to-br from-accentPurple/20 to-accentPurple/10 border-2 border-accentPurple hover:border-accentPurple/70 text-accentPurple hover:text-accentPurple/80 font-600 py-3.5 rounded-lg flex items-center justify-center gap-3 transition-all hover:shadow-md hover:shadow-accentPurple-200/50">
+                                    <span class="material-symbols-outlined w-5 h-5">picture_as_pdf</span>
+                                    Generate Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <!-- PROPERTY RECORDS SECTION -->
+                <div id="property-records-section" class="section hidden">
+                    <div class="flex justify-between items-center mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900">Property Records</h2>
+                            <p class="text-gray-500 mt-2">Manage and track all property records</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <button onclick="showExportModal('property-records')"
+                                    class="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-6 py-2.5 rounded-lg flex items-center gap-2 font-600 text-sm transition-all shadow-sm hover:shadow-md">
+                                <span class="material-symbols-outlined align-middle">download</span> Export
+                            </button>
+                            <button onclick="showPropertyModal()"
+                                    class="btn-primary text-white px-6 py-2.5 rounded-lg flex items-center gap-2 font-600 text-sm transition-all shadow-sm hover:shadow-md">
+                                <span class="material-symbols-outlined align-middle">add</span> New Record
+                            </button>
+                        </div>
+                    </div>
+                   
+                    <div class="bg-white rounded-xl overflow-hidden border border-gray-200 relative">
+                        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+                        <div class="p-6 border-b bg-gradient-to-r from-gray-50 to-white flex items-center gap-4">
+                            <input id="property-search" placeholder="Search owner or lot number..."
+                                   onkeyup="filterPropertyRecords()"
+                                   class="flex-1 bg-gray-100 border-0 py-2.5 px-4 rounded-lg focus:ring-2 focus:ring-blue-600 text-sm">
+                            <select id="property-status-filter" onchange="filterPropertyRecords()"
+                                    class="bg-gray-100 border-0 py-2.5 px-4 rounded-lg focus:ring-2 focus:ring-blue-600 text-sm">
+                                <option value="">All Status</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Processing">Processing</option>
+                                <option value="Released">Released</option>
+                            </select>
+                        </div>
+                       
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b bg-gray-50">
+                                    <th onclick="sortTable('owner_name', 'property-records')" class="cursor-pointer text-left py-5 px-8 font-medium text-sm text-gray-500">Owner Name <span class="material-symbols-outlined align-middle">sort</span></th>
+                                    <th onclick="sortTable('lot_number', 'property-records')" class="cursor-pointer text-left py-5 px-8 font-medium text-sm text-gray-500">Lot Number <span class="material-symbols-outlined align-middle">sort</span></th>
+                                    <th onclick="sortTable('title_number', 'property-records')" class="cursor-pointer text-left py-5 px-8 font-medium text-sm text-gray-500">Title Number <span class="material-symbols-outlined align-middle">sort</span></th>
+                                    <th onclick="sortTable('transaction_type', 'property-records')" class="cursor-pointer text-left py-5 px-8 font-medium text-sm text-gray-500">Type <span class="material-symbols-outlined align-middle">sort</span></th>
+                                    <th onclick="sortTable('created_at', 'property-records')" class="cursor-pointer text-left py-5 px-8 font-medium text-sm text-gray-500">Date Filed <span class="material-symbols-outlined align-middle">sort</span></th>
+                                    <th class="text-center py-5 px-8 font-medium text-sm text-gray-500">Status</th>
+                                    <th class="w-24"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="property-records-table" class="text-sm"></tbody>
+                        </table>
+                        <div id="property-records-pagination" class="p-6 border-t flex justify-between items-center text-sm text-gray-600"></div>
+                    </div>
+                </div>
+               
+                <!-- TRANSACTIONS SECTION -->
+                <div id="transactions-section" class="section hidden">
+                    <div class="flex justify-between items-center mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900">Transactions</h2>
+                            <p class="text-gray-500 mt-2">Review and manage all transactions</p>
+                        </div>
+                        <button onclick="showExportModal('transactions')"
+                                class="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-6 py-2.5 rounded-lg flex items-center gap-2 font-600 text-sm transition-all shadow-sm hover:shadow-md">
+                                <span class="material-symbols-outlined align-middle">download</span> Export
+                            </button>
+                    </div>
+                   
+                    <div class="bg-white rounded-xl overflow-hidden border border-gray-200 relative">
+                        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-600"></div>
+                        <div class="p-6 border-b bg-gradient-to-r from-gray-50 to-white">
+                            <input id="transactions-search" placeholder="Search by owner name..."
+                                   onkeyup="filterTransactions()"
+                                   class="w-full bg-gray-100 border-0 py-2.5 px-4 rounded-lg focus:ring-2 focus:ring-blue-600 text-sm">
+                        </div>
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b bg-gray-50">
+                                    <th onclick="sortTable('owner_name', 'transactions')" class="cursor-pointer text-left py-5 px-8 font-medium text-sm text-gray-500">Owner <span class="material-symbols-outlined align-middle">sort</span></th>
+                                    <th onclick="sortTable('received_date', 'transactions')" class="cursor-pointer text-left py-5 px-8 font-medium text-sm text-gray-500">Received <span class="material-symbols-outlined align-middle">sort</span></th>
+                                    <th onclick="sortTable('released_date', 'transactions')" class="cursor-pointer text-left py-5 px-8 font-medium text-sm text-gray-500">Released <span class="material-symbols-outlined align-middle">sort</span></th>
+                                    <th class="text-center py-5 px-8 font-medium text-sm text-gray-500">Status</th>
+                                    <th class="text-left py-5 px-8 font-medium text-sm text-gray-500">Action Taken</th>
+                                    <th class="w-28"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactions-table" class="text-sm"></tbody>
+                        </table>
+                        <div id="transactions-pagination" class="p-6 border-t flex justify-between items-center text-sm text-gray-600"></div>
+                    </div>
+                </div>
+               
+                <!-- TAX MAPPING SECTION -->
+                <div id="taxmapping-section" class="section hidden">
+                    <div class="flex justify-between items-center mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900">Tax Mapping & Appraisal</h2>
+                            <p class="text-gray-500 mt-2">Manage property appraisals and tax data</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <button onclick="showExportModal('taxmapping')"
+                                    class="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-6 py-2.5 rounded-lg flex items-center gap-2 font-600 text-sm transition-all shadow-sm hover:shadow-md">
+                                <span class="material-symbols-outlined align-middle">download</span> Export
+                            </button>
+                            <button onclick="showTaxModal()"
+                                    class="btn-primary text-white px-6 py-2.5 rounded-lg flex items-center gap-2 font-600 text-sm transition-all shadow-sm hover:shadow-md">
+                                <span class="material-symbols-outlined align-middle">add</span> New Request
+                            </button>
+                        </div>
+                    </div>
+                   
+                    <div class="bg-white rounded-xl overflow-hidden border border-gray-200 relative">
+                        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-purple-600"></div>
+                        <div class="p-6 border-b bg-gradient-to-r from-gray-50 to-white">
+                            <input id="tax-search" placeholder="Search owner or lot..."
+                                   onkeyup="filterTaxMapping()"
+                                   class="w-full bg-gray-100 border-0 py-2.5 px-4 rounded-lg focus:ring-2 focus:ring-blue-600 text-sm">
+                        </div>
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b bg-gray-50">
+                                    <th onclick="sortTable('owner_name', 'taxmapping')" class="cursor-pointer text-left py-5 px-8 font-medium text-sm text-gray-500">Owner <span class="material-symbols-outlined align-middle">sort</span></th>
+                                    <th onclick="sortTable('lot_number', 'taxmapping')" class="cursor-pointer text-left py-5 px-8 font-medium text-sm text-gray-500">Lot Number <span class="material-symbols-outlined align-middle">sort</span></th>
+                                    <th onclick="sortTable('received_date', 'taxmapping')" class="cursor-pointer text-left py-5 px-8 font-medium text-sm text-gray-500">Received <span class="material-symbols-outlined align-middle">sort</span></th>
+                                    <th onclick="sortTable('released_date', 'taxmapping')" class="cursor-pointer text-left py-5 px-8 font-medium text-sm text-gray-500">Released <span class="material-symbols-outlined align-middle">sort</span></th>
+                                    <th class="text-center py-5 px-8 font-medium text-sm text-gray-500">Appraisal Status</th>
+                                    <th class="w-28"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tax-table" class="text-sm"></tbody>
+                        </table>
+                        <div id="taxmapping-pagination" class="p-6 border-t flex justify-between items-center text-sm text-gray-600"></div>
+                    </div>
+                </div>
+               
+                <!-- REPORTS SECTION -->
+                <div id="reports-section" class="section hidden">
+                    <div class="flex justify-between items-center mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900">Reports</h2>
+                            <p class="text-gray-500 mt-2">Generate and export comprehensive reports</p>
+                        </div>
+                    </div>
+                   
+                    <div class="grid grid-cols-3 gap-6">
+                        <button onclick="showExportModal('property-records')"
+                                class="bg-white rounded-xl border border-gray-200 p-8 card-hover text-center cursor-pointer relative overflow-hidden group">
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+                            <div class="mb-6 inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-50 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                <span class="material-symbols-outlined text-3xl text-blue-600">domain</span>
+                            </div>
+                            <p class="font-semibold text-lg text-gray-900">Property Records</p>
+                            <p class="text-sm text-gray-500 mt-2">Export complete property</p>
+                            <p class="text-sm text-gray-500">database records</p>
+                        </button>
+                        <button onclick="showExportModal('transactions')"
+                                class="bg-white rounded-xl border border-gray-200 p-8 card-hover text-center cursor-pointer relative overflow-hidden group">
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-600"></div>
+                            <div class="mb-6 inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                <span class="material-symbols-outlined text-3xl text-emerald-600">handshake</span>
+                            </div>
+                            <p class="font-semibold text-lg text-gray-900">Transactions</p>
+                            <p class="text-sm text-gray-500 mt-2">Generate transaction</p>
+                            <p class="text-sm text-gray-500">activity reports</p>
+                        </button>
+                        <button onclick="showExportModal('taxmapping')"
+                                class="bg-white rounded-xl border border-gray-200 p-8 card-hover text-center cursor-pointer relative overflow-hidden group">
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-purple-600"></div>
+                            <div class="mb-6 inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-50 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                <span class="material-symbols-outlined text-3xl text-purple-600">location_on</span>
+                            </div>
+                            <p class="font-semibold text-lg text-gray-900">Tax Mapping</p>
+                            <p class="text-sm text-gray-500 mt-2">Export appraisal and</p>
+                            <p class="text-sm text-gray-500">tax mapping data</p>
+                        </button>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <!-- PROPERTY MODAL -->
+    <div id="property-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+        <div class="modal bg-white rounded-xl w-full max-w-2xl mx-4 overflow-hidden border border-gray-200">
+            <div class="px-8 py-6 border-b flex items-center justify-between bg-gray-50">
+                <h3 id="property-modal-title" class="text-xl font-semibold text-gray-900">New Property Record</h3>
+                <button onclick="hidePropertyModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <span class="material-symbols-outlined text-2xl">close</span>
+                </button>
+            </div>
+           
+            <div class="p-8 space-y-6">
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-600 text-gray-700 mb-2">Owner Name <span class="text-red-500">*</span></label>
+                        <input id="p-owner" type="text" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50">
+                        <p id="p-owner-error" class="error-message">Required</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-600 text-gray-700 mb-2">Lot Number <span class="text-red-500">*</span></label>
+                        <input id="p-lot" type="text" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50">
+                        <p id="p-lot-error" class="error-message">Required</p>
+                    </div>
+                </div>
+               
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-600 text-gray-700 mb-2">Title Number</label>
+                        <input id="p-title" type="text" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-600 text-gray-700 mb-2">Property Location</label>
+                        <input id="p-location" type="text" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50">
+                    </div>
+                </div>
+               
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-600 text-gray-700 mb-2">Transaction Type <span class="text-red-500">*</span></label>
+                        <select id="p-type" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50">
+                            <option value="Transfer">Transfer</option>
+                            <option value="Sale">Sale</option>
+                            <option value="Subdivision">Subdivision</option>
+                            <option value="Consolidation">Consolidation</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-600 text-gray-700 mb-2">Status</label>
+                        <select id="p-status" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50">
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Released">Released</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="px-8 py-6 border-t flex justify-end gap-3">
+                <button onclick="hidePropertyModal()"
+                        class="px-6 py-2.5 font-600 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors text-sm">Cancel</button>
+                <button onclick="exportCurrentProperty()"
+                        class="px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white font-600 rounded-lg transition-colors text-sm">Export to PDF</button>
+                <button onclick="saveProperty()"
+                        id="save-property-btn"
+                        class="px-8 py-2.5 btn-primary text-white font-600 rounded-lg transition-all text-sm">Save Record</button>
+            </div>
+        </div>
+    </div>
+    <!-- TAX MAPPING MODAL -->
+    <div id="tax-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+        <div class="modal bg-white rounded-xl w-full max-w-lg mx-4 border border-gray-200">
+            <div class="px-8 py-6 border-b flex items-center justify-between bg-gray-50">
+                <h3 class="text-xl font-semibold text-gray-900">New Tax Mapping Request</h3>
+                <button onclick="hideTaxModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <span class="material-symbols-outlined text-2xl">close</span>
+                </button>
+            </div>
+           
+            <div class="p-8 space-y-6">
+                <div>
+                    <label class="block text-sm font-600 text-gray-700 mb-2">Owner Name <span class="text-red-500">*</span></label>
+                    <input id="tax-owner" type="text" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50">
+                    <p id="tax-owner-error" class="error-message">Required</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-600 text-gray-700 mb-2">Lot Number <span class="text-red-500">*</span></label>
+                    <input id="tax-lot" type="text" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50">
+                    <p id="tax-lot-error" class="error-message">Required</p>
+                </div>
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-600 text-gray-700 mb-2">Received Date</label>
+                        <input id="tax-received" type="date" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-600 text-gray-700 mb-2">Appraisal Status</label>
+                        <select id="tax-status" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50">
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="px-8 py-6 border-t flex justify-end gap-3">
+                <button onclick="hideTaxModal()" class="px-6 py-2.5 font-600 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors text-sm">Cancel</button>
+                <button onclick="exportCurrentTax()"
+                        class="px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white font-600 rounded-lg transition-colors text-sm">Export to PDF</button>
+                <button onclick="saveTaxMapping()" class="px-8 py-2.5 btn-primary text-white font-600 rounded-lg transition-all text-sm">Save Request</button>
+            </div>
+        </div>
+    </div>
+    <!-- DELETE CONFIRM MODAL -->
+    <div id="delete-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+        <div class="modal bg-white rounded-xl w-full max-w-md p-8 text-center border border-gray-200">
+            <span class="material-symbols-outlined text-5xl text-red-500 mx-auto mb-6">warning</span>
+            <h3 class="text-2xl font-semibold mb-2 text-gray-900">Delete Record?</h3>
+            <p class="text-gray-500 mb-8">This action cannot be undone.</p>
+            <div class="flex gap-3">
+                <button onclick="hideDeleteModal()"
+                        class="flex-1 py-2.5 font-600 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors text-sm">Cancel</button>
+                <button onclick="confirmDelete()"
+                        class="flex-1 py-2.5 font-600 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+    <!-- EXPORT CONFIRM MODAL -->
+    <div id="export-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+        <div class="modal bg-white rounded-xl w-full max-w-md p-8 text-center border border-gray-200">
+            <span class="material-symbols-outlined text-5xl text-blue-600 mx-auto mb-6">picture_as_pdf</span>
+            <h3 class="text-2xl font-semibold mb-2 text-gray-900">Export Report?</h3>
+            <p class="text-gray-500 mb-8">This will generate a PDF report of the selected data.</p>
+            <div class="flex gap-3">
+                <button onclick="hideExportModal()"
+                        class="flex-1 py-2.5 font-600 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors text-sm">Cancel</button>
+                <button onclick="confirmExport()"
+                        class="flex-1 py-2.5 font-600 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm">Yes, Export</button>
+            </div>
+        </div>
+    </div>
+    <!-- TOAST -->
+    <div id="toast" class="hidden fixed bottom-6 right-6 px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 toast bg-gray-800 text-white">
+        <i id="toast-icon" class="text-lg"></i>
+        <span id="toast-message" class="font-500 text-sm"></span>
+    </div>
+    <script src="assets/js/main.js"></script>
+    <script>lucide.replace()</script>
+</body>
+</html>
